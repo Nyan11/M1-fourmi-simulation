@@ -6,7 +6,7 @@ import modelisation.vivant.EtreVivant;
 
 public class Proie implements EtreVivant, Simulable {
 
-	public void deplacer() {
+	public void deplacer(Terrain terrain) {
 		
 	}
 

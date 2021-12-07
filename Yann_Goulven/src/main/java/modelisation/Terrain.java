@@ -1,8 +1,13 @@
 package modelisation;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import modelisation.pheromone.Pheromone;
+import modelisation.utils.Position;
 import modelisation.vivant.fourmi.Fourmi;
 import modelisation.vivant.proie.Proie;
 
@@ -14,11 +19,19 @@ public class Terrain {
 	public final int TAILLE_CASE = 30;
 	public final int TEMPS_ETAPE = 10;
 	
-	protected Collection<Fourmi> fourmis;
-	protected Collection<Pheromone> pheromones;
-	protected Collection<Proie> proies;
+	protected Map<Position, List<Fourmi>> fourmis;
+	protected Map<Position, List<Pheromone>> pheromones;
+	protected Map<Position, List<Proie>> proies;
 	
-	protected Collection<Fourmi> fourmilliere;
+	protected Collection<Fourmiliere> fourmilliere;
+	
+	
+	public Terrain() {
+		this.fourmis = new HashMap<Position, List<Fourmi>>();
+		this.pheromones = new HashMap<Position, List<Pheromone>>();
+		this.proies = new HashMap<Position, List<Proie>>();
+		this.fourmilliere = new ArrayList<Fourmiliere>();
+	}
 
 	/**Main loop de la simulation.
 	 * Met à jour l'état des différents objets de la simulation avec l'ordre suivant :
@@ -36,21 +49,31 @@ public class Terrain {
 
 
 	private void stepFourmis() {
-		for(Fourmi fourmi : this.fourmis) {
-			fourmi.step(this);
+		for (List<Fourmi> list : this.fourmis.values()) {
+			for (Fourmi fourmi : list) {
+				fourmi.step(this);
+			}
 		}
 	}
 
 	private void stepPheromones() {
-		for(Pheromone pheromone : this.pheromones) {
-			pheromone.step(this);
+		for(List<Pheromone> list : this.pheromones.values()) {
+			for (Pheromone pheromone : list) {
+				pheromone.step(this);
+			}
 		}
 	}
 	
 	private void stepProies() {
-		for(Proie proie : this.proies) {
-			proie.step(this);
+		for(List<Proie> list : this.proies.values()) {
+			for (Proie proie : list) {
+				proie.step(this);
+			}
 		}
+	}
+	
+	public Map<Position, List<Pheromone>> getPheromones() {
+		return this.pheromones;
 	}
 
 }

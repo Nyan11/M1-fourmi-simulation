@@ -16,7 +16,7 @@ import nicellipse.component.NiSpace;
 public class Simulation {
 
 	public static void main(String[] args) {
-		JPanel space = new NiSpace("Empty Space", new Dimension(300, 200));
+		JPanel space = new NiSpace("Empty Space", new Dimension(800, 600));
 		JLabel label = new NiLabel("space " + space.getWidth() + "x" + space.getHeight() );
 		label.setFont(new Font("Arial", Font.BOLD, 24));
 		label.setForeground(Color.darkGray);
@@ -33,7 +33,6 @@ public class Simulation {
 		frame.getContentPane().add(space);
 		frame.pack();
 		frame.setVisible(true);
-
 	}
 
 }
