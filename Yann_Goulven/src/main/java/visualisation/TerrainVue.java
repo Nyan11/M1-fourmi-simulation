@@ -91,6 +91,7 @@ public class TerrainVue implements ActionListener {
 		//Collection<Position> copyProies = new ArrayList<Position>(terrain.getMapProie().keySet());
 		this.updateFourmis();
 		this.updatePheromones();
+		this.updateProies();
 		//this.updatePositionVue(pheromonesVues, copyPheromones, 2, Color.YELLOW);
 		//this.updatePositionVue(proiesVues, copyProies, 1, Color.GREEN);
 		//this.updateBatimentVue(1, Color.white);
@@ -100,18 +101,35 @@ public class TerrainVue implements ActionListener {
 	private void updatePheromones() {
 		Collection<PositionVue> aRetirer = new LinkedList<PositionVue>();
 		for (Entry<Position, List<Pheromone>> entrie : terrain.getMapPheromones().entrySet()) {
-			PositionVue positionVue = new PheromoneVue(entrie.getKey(), List.copyOf(entrie.getValue()));
-			if (this.fourmisVues.add(positionVue)) {
+			PositionVue positionVue = new PheromoneVue(entrie.getKey(), entrie.getValue());
+			if (this.pheromonesVues.add(positionVue)) {
 				this.vue.add(positionVue.vue);
 			}
 		}
-		for (PositionVue positionVue : this.fourmisVues) {
-			if(!this.terrain.getMapFourmis().keySet().contains(positionVue.position)) {
+		for (PositionVue positionVue : this.pheromonesVues) {
+			if(!this.terrain.getMapPheromones().keySet().contains(positionVue.position)) {
 				aRetirer.add(positionVue);
 				this.vue.remove(positionVue.vue);
 			}
 		}
-		this.fourmisVues.removeAll(aRetirer);
+		this.pheromonesVues.removeAll(aRetirer);
+	}
+	
+	private void updateProies() {
+		Collection<PositionVue> aRetirer = new LinkedList<PositionVue>();
+		for (Entry<Position, List<EtreVivant>> entrie : terrain.getMapProie().entrySet()) {
+			PositionVue positionVue = new ProieVue(entrie.getKey(), entrie.getValue());
+			if (this.proiesVues.add(positionVue)) {
+				this.vue.add(positionVue.vue);
+			}
+		}
+		for (PositionVue positionVue : this.proiesVues) {
+			if(!this.terrain.getMapProie().keySet().contains(positionVue.position)) {
+				aRetirer.add(positionVue);
+				this.vue.remove(positionVue.vue);
+			}
+		}
+		this.proiesVues.removeAll(aRetirer);
 	}
 /*
 	private void updateBatimentVue(int size, Color couleur) {

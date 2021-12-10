@@ -60,6 +60,9 @@ public class Terrain implements Runnable {
 		this.stepPheromones();
 		this.stepProies();
 		this.stepFourmilieres();
+		this.ajouteProiesAleatoire(1, 10, 30, 10);
+		this.ajouteProiesAleatoire(1, 40, 0, 10);
+		this.ajouteProiesAleatoire(1, -25, -20, 10);
 		this.date++;
 		this.date = this.date % 3600;
 	}
@@ -265,18 +268,14 @@ public class Terrain implements Runnable {
 		list.add(new PheromoneRecherche(pheromone.getPosition()));
 	}
 	
-	private void ajoutProiesAleatoire(int nb, int x, int y, int size) {
+	private void ajouteProiesAleatoire(int nb, int x, int y, int size) {
 		for (int i = 0; i < nb; i++) {
 			Position position = new Position(
 					(int)(Math.random() * size - x),
 					(int)(Math.random() * size - y)
 				);
-			List<EtreVivant> list = this.getMapProie().get(position);
-			if (list == null) {
-				list = new ArrayList<EtreVivant>();
-				this.getMapProie().put(position, list);
-			}
-			list.add(new Proie((int)(Math.random() * 50 + 60), position));
+			Proie proie = new Proie((int)(Math.random() * 50 + 60), position);
+			this.rajouterProie(position, proie);
 		}
 	}
 }

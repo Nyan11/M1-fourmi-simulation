@@ -21,7 +21,7 @@ public class FourmiVue extends PositionVue {
 
 	private Color getColor(List<Fourmi> list) {
 		Color color = Color.BLUE;
-		/*
+
 		for (Fourmi fourmi: list) {
 			if (fourmi.getStade().estReine()) {
 				return Color.CYAN;
@@ -34,7 +34,7 @@ public class FourmiVue extends PositionVue {
 			} else if (color != Color.WHITE && color != Color.RED && color != Color.PINK && color != Color.ORANGE &&fourmi.getStade().estMort()) {
 				color = Color.WHITE;
 			}
-		}*/
+		}
 		return color;
 	}
 }
