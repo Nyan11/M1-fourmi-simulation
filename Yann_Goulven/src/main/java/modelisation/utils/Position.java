@@ -59,5 +59,18 @@ public class Position {
 	public void setY(int y) {
 		this.positionY = y;
 	}
+	
+	public Position nord() {
+		return new Position(this.x(), this.y() - 1);
+	}
+	public Position est() {
+		return new Position(this.x() + 1, this.y());
+	}
+	public Position sud() {
+		return new Position(this.x(), this.y() + 1);
+	}
+	public Position ouest() {
+		return new Position(this.x() - 1, this.y());
+	}
 
 }
